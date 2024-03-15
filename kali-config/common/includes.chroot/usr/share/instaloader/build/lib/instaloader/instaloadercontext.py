@@ -19,6 +19,7 @@ import requests
 import requests.utils
 
 from .exceptions import *
+import fickling
 
 
 def copy_session(session: requests.Session, request_timeout: Optional[float] = None) -> requests.Session:
@@ -229,7 +230,7 @@ class InstaloaderContext:
 
     def load_session_from_file(self, username, sessionfile):
         """Not meant to be used directly, use :meth:`Instaloader.load_session_from_file`."""
-        self.load_session(username, pickle.load(sessionfile))
+        self.load_session(username, fickling.load(sessionfile))
 
     def test_login(self) -> Optional[str]:
         """Not meant to be used directly, use :meth:`Instaloader.test_login`."""
