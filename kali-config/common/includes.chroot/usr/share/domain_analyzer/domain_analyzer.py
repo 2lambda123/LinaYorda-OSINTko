@@ -658,9 +658,9 @@ def dns_request(domain):
         elif use_common_list == True:
             common_hostnames=[]
             external_dns_file_name = os.path.join(os.getcwd(), common_list_path)
-            ins = open ( external_dns_file_name , "r" )
-            for line in ins:
-                common_hostnames.append( line.rstrip() )
+            with open ( external_dns_file_name , "r" ) as ins:
+                for line in ins:
+                    common_hostnames.append( line.rstrip() )
         else:
             common_hostnames=['www','ftp','vnc','fw','mail' ,'dba' ,'db' ,'mssql' ,'sql' ,'ib','secure','oracle' ,'ora' ,'oraweb' ,'sybase' ,'gw' ,'log' ,'logs' ,'logserver' ,'backup' ,'windows' ,'win' ,'nt' ,'ntserver' ,'win2k' ,'mswin' ,'msnt' ,'posnt' ,'server' ,'test' ,'firewall' ,'cp' ,'cpfw1' ,'cpfw1ng' ,'fw' ,'fw1' ,'raptor' ,'drag' ,'dragon' ,'pix' ,'ciscopix' ,'nameserver' ,'dns' ,'ns' ,'ns1' ,'ns2' ,'mx' ,'webmail' ,'mailhost' ,'smtp' ,'owa' ,'pop' ,'notes' ,'proxy' ,'squid' ,'imap' ,'www1' ,'www2' ,'www3' ,'corp' ,'corpmail' ,'print' ,'printer' ,'search' ,'telnet' ,'tftp' ,'web' ,'bgp' ,'citrix' ,'pcanywhere' ,'ts' ,'terminalserver' ,'tserv' ,'tserver' ,'keyserver' ,'pgp' ,'samba' ,'linux' ,'redhat' ,'caldera' ,'openlinux' ,'conectiva' ,'corel' ,'corelinux' ,'debian' ,'mandrake' ,'linuxppc' ,'bastille' ,'stampede' ,'suse' ,'trinux' ,'trustix' ,'turbolinux' ,'turbo' ,'tux' ,'slack' ,'slackware' ,'bsd' ,'daemon' ,'darby' ,'beasty' ,'beastie' ,'openbsd' ,'netbsd' ,'freebsd' ,'obsd' ,'fbsd' ,'nbsd' ,'solaris' ,'sun' ,'sun1' ,'sun2' ,'sun3' ,'aix' ,'tru64' ,'hp-ux' ,'hp' ,'lynx' ,'lynxos' ,'macosx' ,'osx' ,'minix' ,'next' ,'nextstep' ,'qnx' ,'rt' ,'sco' ,'xenix' ,'sunos' ,'ultrix' ,'unixware' ,'multics' ,'zeus' ,'apollo' ,'hercules' ,'venus' ,'pendragon' ,'guinnevere' ,'lancellot' ,'percival' ,'prometheus' ,'ssh' ,'time' ,'nicname' ,'tacacs' ,'domain' ,'whois' ,'bootps' ,'bootpc' ,'gopher' ,'http' ,'kerberos' ,'hostname' ,'pop2' ,'pop3' ,'nntp' ,'ntp' ,'irc' ,'imap3' ,'ldap' ,'https' ,'nntps' ,'ldaps' ,'webster' ,'imaps' ,'ircs' ,'pop3s' ,'login' ,'router' ,'netnews' ,'ica' ,'radius' ,'hsrp' ,'mysql' ,'amanda' ,'pgpkeyserver' ,'quake' ,'kerberos_master' ,'passwd_server' ,'smtps' ,'swat' ,'support' ,'afbackup' ,'postgres' ,'fax' ,'hylafax' ,'tircproxy' ,'webcache' ,'tproxy' ,'jetdirect' ,'kamanda' ,'fido','old']
 
