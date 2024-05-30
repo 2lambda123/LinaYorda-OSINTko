@@ -791,7 +791,7 @@ class SocialAnalyzer():
             if path.exists(path_to_check) == False:
                 if not self.silent:
                     self.log.info("[init] Downloading {} from {}".format(name, url_download))
-                file = get(url_download, allow_redirects=True)
+                file = get(url_download, allow_redirects=True, timeout=60)
                 with open(path_to_check, 'wb') as f:
                     f.write(file.content)
             if path.exists(path_to_check) == True:

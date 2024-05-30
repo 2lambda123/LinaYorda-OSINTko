@@ -62,7 +62,7 @@ def main(usernames):
  if usernames == []:
   usernames=input(f"{y}Enter the username{r}:{g}").split()
   try:
-   get("https://www.google.com/")
+   get("https://www.google.com/", timeout=60)
   except exceptions.ConnectionError:
    print(f"{r}!no internet, check connection")
    exit()

@@ -38,7 +38,7 @@ table.add_column("Find", style="dim", width=20, justify="center")
 table.add_column("Url", style="dim", width=40, justify="center")
 
 def site_check_y_n(url, minx, maxx, name_site):
-	response = requests.get(url)
+	response = requests.get(url, timeout=60)
 	if (len(response.text) >= minx):
 		table.add_row(
 		    "\n[green]"+name_site+"[green]\n",
