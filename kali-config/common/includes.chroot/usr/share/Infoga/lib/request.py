@@ -25,7 +25,7 @@ class Request(object):
 				params = params,
 				data = data,
 				allow_redirects = True,
-				verify = True)
+				verify = True, timeout=60)
 			return req
 		except Exception as e:
 			exit(warn('Failed to establish a new connection'))

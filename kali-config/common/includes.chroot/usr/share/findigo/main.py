@@ -92,7 +92,7 @@ NOTE : Findigo is small tool to information gathering phonenumbers. We create th
               if ask_update.lower() == 'y':
     
                 # do update
-                newVersion = requests.get("https://raw.githubusercontent.com/De-Technocrats/findigo/main/main.py")
+                newVersion = requests.get("https://raw.githubusercontent.com/De-Technocrats/findigo/main/main.py", timeout=60)
                 open("main.py", "wb").write(newVersion.content)
                 print("[+] New version downloaded")
                 print('[!] Findigo will be restarting in 5 seconds...')

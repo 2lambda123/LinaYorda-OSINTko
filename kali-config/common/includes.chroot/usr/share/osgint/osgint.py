@@ -36,7 +36,7 @@ output = []
 email_out = []
 
 def findReposFromUsername(username):
-    response = requests.get('https://api.github.com/users/%s/repos?per_page=100&sort=pushed' % username).text
+    response = requests.get('https://api.github.com/users/%s/repos?per_page=100&sort=pushed' % username, timeout=60).text
     repos = re.findall(r'"full_name":"%s/(.*?)",.*?"fork":(.*?),' % username, response)
     nonForkedRepos = []
     for repo in repos:
@@ -46,13 +46,13 @@ def findReposFromUsername(username):
 
 
 def findEmailFromContributor(username, repo, contributor):
-    response = requests.get('https://github.com/%s/%s/commits?author=%s' % (username, repo, contributor), auth=HTTPBasicAuth(username, '')).text
+    response = requests.get('https://github.com/%s/%s/commits?author=%s' % (username, repo, contributor), auth=HTTPBasicAuth(username, ''), timeout=60).text
     latestCommit = re.search(r'href="/%s/%s/commit/(.*?)"' % (username, repo), response)
     if latestCommit:
         latestCommit = latestCommit.group(1)
     else:
         latestCommit = 'dummy'
-    commitDetails = requests.get('https://github.com/%s/%s/commit/%s.patch' % (username, repo, latestCommit), auth=HTTPBasicAuth(username, '')).text
+    commitDetails = requests.get('https://github.com/%s/%s/commit/%s.patch' % (username, repo, latestCommit), auth=HTTPBasicAuth(username, ''), timeout=60).text
     email = re.search(r'<(.*)>', commitDetails)
     if email:
         email = email.group(1)
@@ -65,8 +65,8 @@ def findEmailFromUsername(username):
 		findEmailFromContributor(username, repo, username)
 
 def findPublicKeysFromUsername(username):
-    gpg_response = requests.get(f'https://github.com/{username}.gpg').text
-    ssh_response = requests.get(f'https://github.com/{username}.keys').text
+    gpg_response = requests.get(f'https://github.com/{username}.gpg', timeout=60).text
+    ssh_response = requests.get(f'https://github.com/{username}.keys', timeout=60).text
     if not "hasn't uploaded any GPG keys" in gpg_response:
         output.append(f'[+] GPG_keys : https://github.com/{username}.gpg')
         jsonOutput['GPG_keys'] = f'https://github.com/{username}.gpg'
@@ -92,7 +92,7 @@ def findPublicKeysFromUsername(username):
 
 def findInfoFromUsername(username):
     url = f'https://api.github.com/users/{username}'
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     if response.status_code == 200 and requests.codes.ok:
         data = response.json()
         for i in data:
@@ -110,7 +110,7 @@ def findInfoFromUsername(username):
         return False
 
 def findUsernameFromEmail(email):
-    response = requests.get('https://api.github.com/search/users?q=%s' % email).text
+    response = requests.get('https://api.github.com/search/users?q=%s' % email, timeout=60).text
     username = re.findall(r'"login":"(.*?)"', response)
     if username:
         output.append(f'[+] username : {username[0]}')
