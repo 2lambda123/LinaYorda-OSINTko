@@ -2,7 +2,6 @@ import hashlib
 import json
 import os
 import pickle
-import random
 import re
 import shutil
 import sys
@@ -20,6 +19,7 @@ import requests.utils
 
 from .exceptions import *
 import fickling
+import secrets
 
 
 def copy_session(session: requests.Session, request_timeout: Optional[float] = None) -> requests.Session:
@@ -55,7 +55,7 @@ def default_iphone_headers() -> Dict[str, Any]:
             'x-ig-app-startup-country': 'US',
             'x-ig-bandwidth-speed-kbps': '0.000',
             'x-ig-capabilities': '36r/F/8=',
-            'x-ig-connection-speed': '{}kbps'.format(random.randint(1000, 20000)),
+            'x-ig-connection-speed': '{}kbps'.format(secrets.SystemRandom().randint(1000, 20000)),
             'x-ig-connection-type': 'WiFi',
             'x-ig-device-locale': 'en-US',
             'x-ig-mapped-locale': 'en-US',
@@ -342,7 +342,7 @@ class InstaloaderContext:
     def do_sleep(self):
         """Sleep a short time if self.sleep is set. Called before each request to instagram.com."""
         if self.sleep:
-            time.sleep(min(random.expovariate(0.6), 15.0))
+            time.sleep(min(secrets.SystemRandom().expovariate(0.6), 15.0))
 
     def get_json(self, path: str, params: Dict[str, Any], host: str = 'www.instagram.com',
                  session: Optional[requests.Session] = None, _attempt=1,

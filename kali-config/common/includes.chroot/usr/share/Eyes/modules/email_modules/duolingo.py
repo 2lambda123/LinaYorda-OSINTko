@@ -1,14 +1,14 @@
 from lib.agents import user_agent
 from lib.requests import Requests
 from lib.text import *
-import random
+import secrets
 
 
 async def duolingo(email):
     URL = "https://www.duolingo.com/2017-06-30/users"
 
     headers = {
-        'user-agent': random.choice(user_agent())
+        'user-agent': secrets.choice(user_agent())
     }
 
     params = {

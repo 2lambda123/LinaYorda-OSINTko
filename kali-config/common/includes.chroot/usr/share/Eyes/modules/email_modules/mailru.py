@@ -1,13 +1,13 @@
 from lib.agents import user_agent
 from lib.requests import Requests
 from lib.text import *
-import random
+import secrets
         
 async def mailru(email):
     URL = "https://account.mail.ru/api/v1/user/exists?email={}"
 
     headers = {
-        'user-agent': random.choice(user_agent())
+        'user-agent': secrets.choice(user_agent())
     }
 
     try:
