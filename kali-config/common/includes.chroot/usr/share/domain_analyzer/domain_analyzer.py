@@ -116,6 +116,8 @@ from ansistrm import ColorizingStreamHandler, logging
 import socket
 import os, sys
 import getopt
+import secrets
+
 try:
     import dns.resolver
 except:
@@ -1360,7 +1362,6 @@ def find_and_analyze_random_domains(domain, amount):
     try:
         from  urllib import request
         import re
-        import random
         domain_dict={}
         counter=-1
         uniq_domains_web=""
@@ -1378,12 +1379,12 @@ def find_and_analyze_random_domains(domain, amount):
 
 
         # Initialize random seed
-        random.seed()
+        secrets.SystemRandom().seed()
 
         final_dict={}
         while amount:
             # We search in the first 100 pages
-            page_counter_web = random.randrange(1,100,10)
+            page_counter_web = secrets.SystemRandom().randrange(1,100,10)
             try:
                 results_web = 'http://www.google.com/search?q=inurl%3a'+str(domain)+'&hl=en&btnG=Search&aq=f&start='+ repr(page_counter_web) + '&sa=N'
                 request_web = request.Request(results_web)

@@ -1,15 +1,15 @@
 from lib.agents import user_agent
 from lib.requests import Requests
-import random
 from lib.text import *
 from lib import venom
 from lib.image import get_hashed, fetch_img
+import secrets
 
 async def github(email):
         URL = "https://api.github.com/search/users?q={}+in:email"
 
         headers = {
-            'user-agent': random.choice(user_agent()),
+            'user-agent': secrets.choice(user_agent()),
             # optional but better results 'authorization': 'token YOUR_API_TOKEN'
         }
 

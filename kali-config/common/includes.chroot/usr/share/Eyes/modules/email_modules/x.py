@@ -1,7 +1,8 @@
 from lib.agents import user_agent
 from lib.requests import Requests
 from lib.text import *
-import random, json
+import json
+import secrets
 
 # Twitter 
 
@@ -9,7 +10,7 @@ async def x(email):
     URL = "https://api.twitter.com/i/users/email_available.json?email={}"
 
     headers = {
-        "user-agent": random.choice(user_agent())
+        "user-agent": secrets.choice(user_agent())
     }
 
     try:

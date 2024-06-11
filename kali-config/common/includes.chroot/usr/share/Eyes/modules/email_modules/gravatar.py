@@ -1,14 +1,14 @@
 from lib.agents import user_agent
 from lib.requests import Requests
 from lib.text import *
-import random
+import secrets
 
 
 async def gravatar(email):
     URL = "https://en.gravatar.com/{}.json"
 
     headers = {
-        'user-agent': random.choice(user_agent())
+        'user-agent': secrets.choice(user_agent())
     }
 
     try:

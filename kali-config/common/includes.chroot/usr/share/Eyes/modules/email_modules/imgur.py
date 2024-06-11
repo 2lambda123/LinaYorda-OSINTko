@@ -1,14 +1,14 @@
 from lib.agents import user_agent
 from lib.requests import Requests
 from lib.text import *
-import random
+import secrets
 
         
 async def imgur(email):
     URL = "https://imgur.com/signin/ajax_email_available"
 
     headers = {
-        'user-agent': random.choice(user_agent())
+        'user-agent': secrets.choice(user_agent())
     }
  
     data = {

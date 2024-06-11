@@ -29,7 +29,6 @@ from re import compile as recompile
 from re import search as research
 from contextlib import suppress
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from random import randint
 from tempfile import mkdtemp
 from urllib.parse import unquote, urlparse
 from urllib3.exceptions import InsecureRequestWarning
@@ -40,6 +39,7 @@ from termcolor import colored
 from langdetect import detect
 from warnings import filterwarnings
 from galeodes import Galeodes
+import secrets
 
 filterwarnings('ignore', category=RuntimeWarning, module='runpy')
 packages.urllib3.disable_warnings(category=InsecureRequestWarning)
@@ -273,7 +273,7 @@ class SocialAnalyzer():
         if self.timeout:
             sleep(self.timeout)
         else:
-            sleep(randint(1, 99) / 100)
+            sleep(secrets.SystemRandom().randint(1, 99) / 100)
 
         checking_url = None
         with suppress(Exception):

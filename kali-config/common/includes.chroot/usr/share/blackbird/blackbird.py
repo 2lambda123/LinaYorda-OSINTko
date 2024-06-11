@@ -2,7 +2,6 @@ import argparse
 import asyncio
 import json
 import os
-import random
 import subprocess
 import sys
 import time
@@ -13,6 +12,7 @@ from datetime import datetime
 import aiohttp
 from bs4 import BeautifulSoup
 from colorama import Fore, init
+import secrets
 
 file = open('data.json')
 searchData = json.load(file)
@@ -58,7 +58,7 @@ async def findUsername(username, interfaceType, flag_csv=False):
 async def makeRequest(session, u, username, interfaceType):
     url = u["url"].format(username=username)
     jsonBody = None
-    useragent = random.choice(useragents)
+    useragent = secrets.choice(useragents)
     headers = {
         "User-Agent": useragent
     }
